@@ -1,0 +1,1276 @@
+// *********************************************************************
+// *********************************************************************
+// *********************************************************************
+
+// GENERIC
+@import 'generic/_generic.box-sizing';
+@import 'generic/_generic.reset';
+
+//SETTINGS
+@import 'settings/_settings.breakpoints';
+@import 'settings/_settings.colours';
+@import 'settings/_settings.easings';
+@import 'settings/_settings.percents';
+@import 'settings/_settings.typography';    
+
+//THEME
+@import 'theme/_theme.colours';  
+
+//TOOLS
+@import 'tools/_tools.css-locks';
+@import 'tools/_tools.align';
+@import 'tools/_tools.background-cover';
+@import 'tools/_tools.clearfix';
+@import 'tools/_tools.flex-left-right';  
+@import 'tools/_tools.height-width';
+@import 'tools/_tools.image-cover';
+@import 'tools/_tools.lead-paragraph';
+@import 'tools/_tools.media-queries';  
+@import 'tools/_tools.radius';  
+@import 'tools/_tools.selection';     
+@import 'tools/_tools.shadows';
+@import 'tools/_tools.transition';    
+@import 'tools/_tools.edit'; 
+
+//UTILITIES
+@import 'utilities/_utilities.grid';
+@import 'utilities/_utilities.typography';  
+
+//ELEMENTS   
+@import 'elements/_elements.buttons';
+
+//COMPONENTS
+@import 'components/_components.accordion';                   
+@import 'components/_components.hero';     
+@import 'components/_components.modal';    
+@import 'components/_components.nav';  
+@import 'components/_components.tabs';    
+@import 'components/_components.form';    
+  
+//VENDORS
+
+@import 'vendors/decolines';
+@import 'vendors/slick';     
+
+// Helpers ==============================================================
+
+//@include edit();
+
+@include selection();
+
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+
+html::-webkit-scrollbar {
+    height: .3rem;
+}
+ 
+html::-webkit-scrollbar-track {
+    background: transparent;
+}
+ 
+html::-webkit-scrollbar-thumb {
+  background-color: $c-primary;
+
+  @include mq(m) {
+    display: none;
+  }
+}
+
+.loader {
+    position: fixed;
+    z-index: 80;
+    height: 100vh;
+    width: 100vw;
+    background: $c-secondary;
+    @include transition($e: $easeOutCust, $t: 500ms);
+    transition-delay: 200ms;
+
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: 90;
+        height: 100%;
+        width: 100%;
+        background: $c-primary;
+        @include transition($e: $easeOutCust, $t: 500ms);
+        transition-delay: 100ms;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: 100;
+        height: 100%;
+        width: 100%;
+        background: $c-white;
+        @include transition($e: $easeOutCust, $t: 500ms);
+    }
+}
+
+.loader.is--loaded {
+        transform: translateX(250vh);
+
+    &:before {
+        transform: translateX(100vh);
+    }
+
+    &:after {
+        transform: translateX(100vh);
+    }
+}
+ 
+$colors:
+  #28C817,
+  #22BD41,
+  #1BD050,
+  #32A921,
+  #4CAF50,
+  #8BC34A,
+  #CDDC39,
+  #FFEB3B;
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 110;
+  height: 30px;
+  width: 30px;
+  transform: translate(-50%, -50%);
+}
+
+[class^="ball-"] {
+    position: absolute;
+    display: block;
+    left: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    transition: all 0.5s;
+    animation: circleRotate 4s both infinite;
+    transform-origin: 0 100% 0;
+}
+
+@keyframes circleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% { 
+    transform: rotate(1440deg); 
+  }
+}
+
+@for $i from 1 through 8 {
+  .ball-#{$i} {
+    z-index: -#{$i};
+    background-color: nth($colors, $i);
+    animation-timing-function: cubic-bezier(0.5, 0.3 * $i, 0.9, 0.9);
+  }
+}
+
+span {
+    display: inline-block;
+}
+
+body {
+    height: 100%;
+    width: 100vw;
+    background: $c-grey-darker;
+    overflow-y: hidden;
+
+    @include mq(m) {
+        overflow-y: scroll;
+    }
+}
+
+h2 {
+    margin-bottom: 0;
+    font-size: $h3;
+    color: $c-grey-darkest;
+}
+
+.chalk {
+    font-family: $g-font-two;
+    margin-top: 0;
+    margin-bottom: .75rem;
+}
+
+.card {
+
+    h2 {
+
+        &:first-of-type {
+            margin-top: 3rem;
+        }
+    }
+
+    p {
+        margin-bottom: 1rem;
+    }
+}
+
+.main {
+    display: flex;
+    height: 100vh;
+    width: 5500px;
+    position: relative;
+    left: 100px;
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-image: url('../img/bg.jpg');
+    overflow-y: hidden;
+
+    @include mq(xl) {
+        width: 6000px;
+    }
+
+    @include mq(m) {
+        left: 50px;
+        width: 2500px;
+    }
+}
+
+.wind-1 {
+    position: absolute;
+    left: 50rem;
+    top: 3rem;
+    overflow: hidden;
+
+    @include mq(m) {
+        display: none;
+    }
+
+    @include mq(xl) {
+        left: 60rem;
+    }
+
+    img {
+        width: 750px;
+
+        @include mq(xl) {
+            width: 1000px;
+        }
+    }
+}
+
+.wind-2 {
+    position: absolute;
+    left: 150rem;
+    bottom: 15rem;
+    overflow: hidden;
+
+    @include mq(m) {
+        display: none;
+    }
+
+    @include mq(xl) {
+        left: 185rem;
+    }
+
+    img {
+        width: 250px;
+    }
+}
+
+.wind-3 {
+    position: absolute;
+    left: 232rem;
+    top: 6rem;
+    overflow: hidden;
+
+    @include mq(m) {
+        display: none;
+    }
+
+    @include mq(xl) {
+        top: 15rem;
+        left: 264rem;
+    }
+
+    img {
+        width: 400px;
+
+        @include mq(xl) {
+            width: 450px;
+        }
+    }
+}
+
+.intro {
+    width: 100vw;
+    position: relative;
+
+    .intro-phrase {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .activate-phrase {
+        display: flex;
+        align-items: center;
+
+        .activate {
+            margin-right: 1rem;
+            transform-origin: bottom left;
+        }
+
+        .activate,
+        .your {
+            height: 7rem;
+            position: relative;
+            max-height: 100px;
+            transform-origin: center bottom;
+
+            @include mq(xl) {
+                height: 9rem;
+                max-height: 125px;
+            }
+
+            @include mq(m) {
+                max-height: 3rem;
+            }
+        }
+
+        .your {
+            transform: translateY(1rem);
+        }
+    }
+
+    .health-phrase {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+
+        .inner,
+        .health,
+        .freak {
+            height: 2.5rem;
+
+            @include mq(m) {
+                height: 1.5rem;
+            }
+        }
+
+        .inner,
+        .health {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.intro-content {
+    height: 100vh;
+    position: absolute;
+    top: 4rem;
+    left: 2rem;
+    width: 70vh;
+    text-align: center;
+    margin-left: 100px;
+
+    @include mq(m) {
+        top: 2rem;
+        left: -8rem;
+    }
+
+    @include mq(xl) {
+        top: 10rem; 
+    }
+}
+
+.intro-logo {
+
+    img {
+        height: 80px;
+
+        @include mq(m) {
+            height: 40px;
+        }
+    }
+}
+
+.intro-slogan {
+    width: 100%;
+
+    h3 {
+        font-family: $g-font-two;
+        color: $c-white;
+        width: 100%;
+
+        @include mq(m) {
+            font-size: 1.25rem;
+            max-width: 60%;
+            margin: 1.5rem auto;
+            line-height: 1;
+        }
+        
+        span {
+            display: inline-block;
+        }
+    }
+}
+
+.intro-bottles {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    @include mq(xl) {
+    right: 5rem;
+
+        img {
+            height: 800px;
+        }
+    }
+
+    @include mq(m) {
+        right: 0;
+
+        img {
+            height: 275px;
+        }
+    }
+}
+
+//
+//
+// Charcoal
+//
+//
+
+.charcoal {
+    height: 100vh;
+    padding-left: 10rem;
+    display: flex;
+    position: relative;
+
+    @include mq(m) {
+        padding-left: 0;
+    }
+}
+
+.card-1 {
+    height: 100%;
+    position: relative;
+    transform: translateX(300px);
+    @include transition($e: $easeOutQuint, $t: 600ms);
+
+    @include mq(m) {
+        transform: translateX(0);
+    }
+
+    .card-content {
+        position: absolute;
+        padding: 1rem;
+
+        @include mq(xl) {
+            top: 4rem;
+        }
+
+        @include mq(m) {
+            top: 1.5rem;
+        }
+
+        p {
+            font-family: $g-font-three;
+            line-height: 1.35;
+        }
+
+        @include mq(m) {
+
+            h2 {
+                font-size: $h5;
+                margin-bottom: 0;
+                line-height: 1;
+
+                &:last-of-type {
+                    margin-bottom: .5rem;
+                }
+            }
+
+            p {
+                font-size: .9rem;
+                margin-bottom: .5rem;
+            }
+        }
+    }
+
+    .card-image {
+        margin-top: 2rem;
+
+        @include mq(xl) {
+            margin-top: 6rem;
+        }
+
+        @include mq(m) {
+            margin-top: -5rem;
+        }
+    
+        img {
+            max-height: 700px;
+
+            @include mq(xl) {
+                max-height: 800px;
+            }
+
+            @include mq(m) {
+                max-height: 600px;
+            }
+        }
+
+        .card-1-2 {
+            display: none;
+
+            @include mq(m) {
+                display: block;
+            }
+        }
+
+        .card-1-1 {
+
+            @include mq(m) {
+                display: none;
+            }
+        }
+    }
+}
+
+.card-1.is--active {
+    transform: translateX(0);
+}
+
+//
+// Product Viewer
+//
+
+.product-viewer-mobile {
+    display: none;
+
+    img {
+        max-height: 550px;
+        margin-top: 3rem;
+    }
+
+    @include mq(m) {
+        display: block;
+    }
+}
+
+.product-viewer-wrapper {
+    position: relative;
+    margin-left: -20rem;
+
+    @include mq(m) {
+        display: none;
+    }
+
+    > div {
+        display: inline-block;
+    }
+
+    .product-viewer {
+        position: relative;
+        top: 11rem;
+        z-index: 1;
+        display: inline-block;
+        overflow-x: hidden;
+        transform: scale(1.45);
+
+        @include mq(xl) {
+            top: 20rem;
+            transform: scale(1.65);
+        }
+    }
+
+    img {
+        /* this is the image visible before the image sprite is loaded */
+        display: block;
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    .product-sprite {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        height: 100%;
+        /* our image sprite is composed by 16 frames */
+        width: 1600%;
+        background: url(../img/img-sprite2.png) no-repeat top center;
+        //background-size: contain;
+        opacity: 1;
+        transition: opacity .3s;
+    }
+
+    &.loaded .product-sprite {
+        opacity: 1;
+    }
+}
+
+.leaf {
+    position: absolute;
+    left: -3rem;
+    top: 4rem;
+    transform: scale(0) rotate(25deg);
+    transform-origin: bottom;
+    @include transition($e: $easeOutBack);
+
+    @include mq(xl) {
+        left: -9rem;
+    }
+
+    img {
+        height: 200px;
+
+        @include mq(xl) {
+            height: 300px;
+        }
+    }
+}
+
+.leaf.is--active {
+    transform: scale(1) rotate(0);
+}
+
+.orange {
+    position: absolute;
+    right: 12rem;
+    top: 10rem;
+    transform: scale(0) rotate(25deg);
+    transform-origin: bottom;
+    @include transition($e: $easeOutBack);
+
+    @include mq(xl) {
+        top: 18rem;
+        right: 9rem;
+    }
+
+    img {
+        height: 200px;
+
+        @include mq(xl) {
+            height: 250px;
+        }
+    }
+}
+
+.orange.is--active {
+    transform: scale(1) rotate(0);
+}
+
+.product-viewer-handle {
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 60%;
+    max-width: 300px;
+    border-radius: 50em;
+    margin: 1em auto 3em;
+    height: 4px;
+    background: tint($c-primary, 30%);
+
+    @include mq(xl) {
+        top: 6rem;
+    }
+
+    .fill {
+        /* this is used to create the loading fill effect */
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        height: 10px;
+        width: 100%;
+        border-radius: inherit;
+        background: url('../img/track.png');
+        background-repeat: repeat-x;
+        background-size: 8px;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform .5s;
+    }
+
+    .no-csstransitions & .fill {
+        display: none;
+    }
+
+    .handle {
+        position: absolute;
+        z-index: 2;
+        display: inline-block;
+        height: 44px;
+        width: 44px;
+        left: 0;
+        top: -20px;
+        background: $c-primary url(../img/arrows.svg) no-repeat center center;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px rgba($c-grey, .3), 0 0 20px rgba(#000, .2);
+
+        /* replace text with image */
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        color: transparent;
+        transform: translateX(-50%) scale(0);
+        transition: box-shadow .2s;
+
+        &:active {
+            box-shadow: 0 0 0 0 rgba($c-grey, 0), 0 0 20px rgba(#000, .2);
+        }
+    }
+
+    .loaded & .handle {
+        /* image sprite has been loaded */
+        transform: translateX(-50%) scale(1);
+        animation: cd-bounce .3s .3s;
+        animation-fill-mod: both;
+        cursor: ew-resize;
+    }
+}
+
+@keyframes cd-bounce {
+    0% {
+        transform: translateX(-50%) scale(0);
+    }
+
+    60% {
+        transform: translateX(-50%) scale(1.1);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+    
+    }
+}
+
+//
+//
+// Detox
+//
+//
+
+.detox {
+    height: 100vh;
+    margin-left: -7rem;
+    display: flex;
+    position: relative;
+
+    @include mq(m) {
+        margin-left: 0;
+    }
+}
+
+.detox-content {
+    width: 30rem;
+    position: relative;
+
+    .tab {
+        position: absolute;
+        opacity: 0;
+        @include transition();
+    }
+
+    .tab.is--active {
+        opacity: 1;
+    }
+
+    p {
+        color: $c-white;
+        font-family: $g-font-three;
+    }
+}
+
+.detox-title {
+    margin-top: 1rem;
+
+    @include mq(m) {
+        
+        > div {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+    }
+
+    @include mq(xl) {
+        margin-top: 8rem;
+    }
+
+    img {
+        display: block;
+        height: 7rem;
+        margin-bottom: 1rem;
+
+        @include mq(m) {
+            height: 4rem;
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+    }
+
+    h3 {
+        color: $c-white;
+        margin-bottom: 1rem;
+    }
+}
+
+.ingredients {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    @include mq(m) {
+        margin-top: 0;
+    }
+}
+
+#carousel {
+    overflow: visible !important;
+    position: absolute;
+    z-index: 0;
+    top: 15rem;
+    left: 15rem;
+
+    @include mq(xl) {
+        top: 22rem;
+    }
+
+    img {
+        max-height: 700px;
+
+        @include mq(xl) {
+            max-height: 750px;
+        }
+
+        @include mq(m) {
+            max-height: 400px;
+        }
+    }
+}
+
+.tea-select {
+    position: relative;
+    display: flex;
+    left: 9rem;
+    top: 3rem;
+
+    @include mq(xl) {
+        top: 8rem;
+    }
+
+    .select {
+        margin-right: 3rem;
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        border: solid 3px green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .75rem;
+        @include transition();
+
+        @include mq(xl) {
+            height: 55px;
+            width: 55px;
+        }
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .peach {
+        background: #E38124;
+        border-color: #E38124;
+    }
+
+    .cherry {
+        background: #D22928;
+        border-color: #D22928;
+    }
+
+    .mint {
+        background: #F1C918;
+        border-color: #F1C918;
+    }
+
+    .honey {
+        background: #EAAE20;
+        border-color: #EAAE20;
+    }
+
+    .is--active {
+        background: transparent;
+    }
+
+    .peach.is--active {
+        border-color: #E38124;
+    }
+
+    .cherry.is--active {
+        border-color: #D22928;
+    }
+
+    .mint.is--active {
+        border-color: #F1C918;
+    }
+
+    .honey.is--active {
+        border-color: #EAAE20;
+    }
+
+}
+
+.detox-fuzzy {
+    height: 9rem !important;
+    margin-bottom: -2rem !important;
+
+    @include mq(m) {
+        height: 5rem !important;
+    }
+}
+
+.detox-slider {
+    @include mq(m) {
+        margin-left: 0rem;
+    }
+}
+
+//
+//
+// Subscriptions
+//
+//
+
+.subscriptions {
+    height: 100vh;
+    margin-left: 35rem;
+    display: flex; 
+    position: relative;
+
+    @include mq(m) {
+        margin-left: 10rem;
+    }
+}
+
+.subscriptions-image {
+    height: 100%;
+
+    @include mq(m) {
+        height: 80%;
+    }
+
+    img {
+        margin-top: 5rem;
+        height: 28rem;
+
+        @include mq(xl) {
+            margin-top: 8rem;
+            margin-left: 5rem;
+        }
+
+        @include mq(m) {
+            height: 70%;
+        }
+    }
+}
+
+.card-2 {
+    height: 100%;
+    position: relative;
+    top: -4rem;
+    margin-left: 5rem;
+    transform: translateX(300px);
+    @include transition($e: $easeOutQuint, $t: 600ms);
+
+    @include mq(xl) {
+        top: 2rem;
+    }
+
+    @include mq(m) {
+        margin-left: -16rem;
+    }
+
+    .card-content {
+        position: absolute;
+        padding: 2rem;
+        top: 8rem;
+
+        @include mq(xl) {
+            top: 12rem;
+        }
+
+        p {
+            font-family: $g-font-three;
+            font-size: $h6;
+        }
+    }
+
+    .card-image {
+    
+        img {
+            max-height: 800px;
+
+            @include mq(xl) {
+                max-height: 900px;
+            }
+
+            @include mq(m) {
+                max-height: 600px;
+            }
+        }
+    }
+}
+
+.card-2.is--active {
+    transform: translateX(0);
+}
+
+.coming-soon {
+    transform: translateY(15px) rotate(-5deg);
+
+    @include mq(m) {
+        max-width: 200px;
+    }
+}
+
+.lemon {
+    position: absolute;
+    left: -14rem;
+    top: 8rem;
+    transform: scale(0) rotate(25deg);
+    transform-origin: bottom;
+    @include transition($e: $easeOutBack);
+
+    @include mq(xl) {
+        top: 18rem;
+    }
+
+    img {
+        height: 150px;
+
+        @include mq(xl) {
+            height: 200px;
+        }
+    }
+}
+
+.lemon.is--active {
+    transform: scale(1) rotate(0);
+}
+
+//
+//
+// Progress Bar
+//
+//
+
+.progress {
+    width: 100vh;
+    height: 5px;
+    position: fixed;
+    z-index: 50;
+    bottom: 4rem;
+    left: 0%;
+    //transform: translateX(-50%);
+}
+
+.progress-bar {
+    height: 100%;
+    width: 100%;
+    background: $c-primary;
+}
+
+.main {
+
+    @include mq(m) {
+        display: none;
+    }
+}
+
+.main-menu {
+
+    @include mq(m) {
+        display: none;
+    }
+}
+
+.mobile {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    overflow-x: hidden;
+    width: calc(100vw - 50px);
+
+    @include mq(m) {
+        display: block;
+    }
+
+}
+
+.mobile-menu {
+    display: none;
+
+    @include mq(m) {
+        display: block;
+    }
+}
+
+.header-mobile {
+    @include cover();
+    @include hw();
+    background-image: url('../img/mobile-bg.jpg');
+    position: relative;
+}
+
+.mobile-intro {
+    width: 280px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-60%);
+}
+
+.mobile-bottle {
+    max-width: 300px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-60%);
+}
+
+.mobile-activated {
+    background-image: url('../img/mobile-paper-1.png');
+    background-size: 1000%;
+    padding-bottom: 2rem;
+    position: relative;
+
+    &:after {
+        content: '' ;
+        position: absolute;
+        bottom: -75px;
+        left: 0;
+        width: 100vw;
+        height: 200px;
+        background-size: cover;
+        background-image: url('../img/mobile-paper-1.png');
+    }
+
+    .row {
+        position: relative;
+        z-index: 10;
+        @include container();
+        padding: 2rem;
+    }
+
+    h2 {
+        
+        &:first-of-type {
+            margin-top: 0;
+            padding-top: 2rem;
+            color: $c-secondary;
+        }
+    }
+}
+
+.mobile-chalk {
+    @include cover();
+    background-image: url('../img/mobile-chalk.jpg');
+    height: 570px;
+
+    .tab {
+        position: absolute;
+        opacity: 0;
+        @include transition();
+    }
+
+    .tab.is--active {
+        opacity: 1;
+    }
+
+    p {
+        color: $c-white;
+        font-family: $g-font-three;
+    }
+
+    .detox-slider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 4rem;
+        margin-left: -1rem;
+    }
+
+    .tea-select {
+        max-width: 80%;
+        top: 0;
+        left: 0;
+    }
+
+    .tea-select .select {
+        height: 40px;
+        width: 40px;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .tab {
+        padding: 2rem;
+    }
+
+    .detox-title {
+
+        img {
+            max-width: 200px;
+            max-height: 40px;
+        }
+
+        h3 {
+            font-size: $h6;
+        }
+    }
+
+}
+
+.mobile-order {
+    background-image: url('../img/mobile-paper-1.png');
+    background-size: 1000%;
+    padding-bottom: 2rem;
+    position: relative;
+
+    .row {
+        position: relative;
+        z-index: 20;
+        max-width: 80%;
+        margin: 0 auto;
+        text-align: center;
+
+        img {
+            max-width: 60%;
+        }
+    }
+
+    &:after {
+        content: '' ;
+        position: absolute;
+        z-index: 0;
+        top: -75px;
+        left: 0;
+        width: 100vw;
+        height: 200px;
+        background-size: cover;
+        background-image: url('../img/mobile-paper-2.png');
+    }
+
+}

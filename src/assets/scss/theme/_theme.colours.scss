@@ -1,0 +1,17 @@
+///* ========================================================================
+//   #THEME COLOURS
+//   ======================================================================== */
+
+  // THEME SPECIFIC Colours
+
+$c-primary: #FCD331;
+$c-primary-light: lighten($c-primary, 10%);
+$c-primary-dark: darken($c-primary, 15%);
+
+$c-secondary: #6DB956;
+$c-secondary-light: lighten($c-secondary, 10%);
+$c-secondary-dark: darken($c-secondary, 15%);
+
+$c-tertiary: #937F66;
+$c-tertiary-light: lighten($c-tertiary, 10%);
+$c-tertiary-dark: darken($c-tertiary, 15%);
